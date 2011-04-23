@@ -1,3 +1,4 @@
+from src.commands.cmdset import CmdSet
 from game.gamesrc.commands.basecommand import MuxCommand
 from merlin.models import BBGroup
 
@@ -150,3 +151,17 @@ class CmdBbPost(MuxCommand):
     def func(self):
         caller = self.caller
         caller.msg("Kerpow!")
+
+class MerlinBbCmdSet(CmdSet):
+    """
+    This gets added to whatever command set you'd like the BB to be accessible
+    from. Your default command set is recommended.
+    """
+    key = "MerlinBbCmdSet"
+
+    def at_cmdset_creation(self):
+        self.add(CmdBbClearGroup())
+        self.add(CmdBbList())
+        self.add(CmdBbNewGroup())
+        self.add(CmdBbPost())
+        self.add(CmdBbRead()) 
